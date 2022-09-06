@@ -51,10 +51,25 @@ public class CompanyRepository {
                 .collect(Collectors.toList());
     }
 
+    public Company addCompany(Company company) {
+        int nextId = generateNextId();
+        company.setId(nextId);
+        this.companies.add(company);
+
+        return company;
+    }
+
     private Company findById(Integer id) {
         return this.companies.stream()
                 .filter(company -> company.getId().equals(id))
                 .findFirst()
                 .orElseThrow(CompanyNotFoundException::new);
+    }
+
+    private Integer generateNextId() {
+        return this.companies.stream()
+                .mapToInt(Company::getId)
+                .max()
+                .orElse(1) + 1;
     }
 }
