@@ -49,4 +49,8 @@ public class CompanyController {
         company.setId(id);
         return this.companyRepository.updateCompany(id, company);
     }
+
+    @DeleteMapping("{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteCompany(@PathVariable Integer id) {this.companyRepository.delete(id);}
 }

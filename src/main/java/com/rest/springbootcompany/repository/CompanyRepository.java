@@ -72,6 +72,11 @@ public class CompanyRepository {
         return ExistingCompany;
     }
 
+    public void delete(Integer id) {
+        Company existingCompany = findById(id);
+        companies.remove(existingCompany);
+    }
+
     private Company findById(Integer id) {
         return this.companies.stream()
                 .filter(company -> company.getId().equals(id))
