@@ -2,60 +2,36 @@ package com.rest.springbootcompany.repository;
 
 import com.rest.springbootcompany.exception.CompanyNotFoundException;
 import com.rest.springbootcompany.model.Company;
+import com.rest.springbootemployee.model.Employee;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Repository
 public class CompanyRepository {
-    private List<Company> employees;
-    private Integer employeeSize;
+    private List<Company> companies;
+
     public CompanyRepository() {
-        this.employees = new ArrayList<>();
-        this.employees.add((new Company(1,"Mark", 23, "Male", 99999)));
-        this.employees.add(new Company(2, "Luke", 23, "Male", 9999999));
-        this.employees.add(new Company(3, "John", 24, "Male", 99999));
-        this.employeeSize = this.employees.size();
+        List<Employee> employeeList = EmployeeDataLoader();
+        List<Company> companyList = new ArrayList<>();
+        companyList.add(new Company(1, "spring", employeeList));
+        companyList.add(new Company(2, "fall", employeeList));
+        this.companies = companyList;
+    }
+
+    private List<Employee> EmployeeDataLoader() {
+        List<Employee> employees = new ArrayList<>();
+        employees.add((new Employee(1,"Mark", 23, "Male", 99999)));
+        employees.add(new Employee(2, "Luke", 23, "Male", 9999999));
+        employees.add(new Employee(3, "John", 24, "Male", 99999));
+        employees.add(new Employee(4, "Ruby", 24, "Female", 80000));
+        employees.add(new Employee(5, "Lily", 20, "Female", 900000));
+        return employees;
     }
 
     public List<Company> findAll() {
-        return this.employees;
-    }
-
-    public Company findById(Integer id) {
-        return this.employees.stream()
-                .filter(employee -> employee.getId().equals(id))
-                .findFirst()
-                .orElseThrow(CompanyNotFoundException::new);
-    }
-
-    public List<Company> findByGender(String gender) {
-        return this.employees.stream()
-                .filter(employee -> employee.getGender().equals(gender))
-                .collect(Collectors.toList());
-    }
-
-
-    public Company add(Company employee) {
-        int nextId = generateNextId();
-        employee.setId(nextId);
-        this.employees.add(employee);
-        return employee;
-    }
-
-    public Company updateEmployee(Company employee) {
-        Company updatedEmployee = this.employees.stream()
-                .filter(employee1 -> employee1.getId().equals((employee.getId())))
-                .findFirst()
-                .orElseThrow(CompanyNotFoundException::new);
-
-        updatedEmployee.setName(employee.getName());
-        updatedEmployee.setAge(employee.getAge());
-        updatedEmployee.setGender(employee.getGender());
-        updatedEmployee.setSalary(employee.getSalary());
-        return updatedEmployee;
+        return this.companies;
     }
 
     public void delete(Integer id) {

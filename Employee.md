@@ -18,4 +18,11 @@ DELETE    /companies/1# delete a company
 
 COMPANY
 
-{"id": 5,"name": "spring","employees": [{"id": 5,"name": "Lily","age": 20,"gender": "Female","salary": 8000},...]}
+{
+"id": 5,
+"name": "spring",
+"employees": [
+        {"id": 5,"name": "Lily","age": 20,"gender": "Female","salary": 8000},
+        {"id": 6,"name": "Ruby","age": 24,"gender": "Female","salary": 25000}
+    ]
+}
