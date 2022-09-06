@@ -42,4 +42,11 @@ public class CompanyController {
     public Company createCompany(@RequestBody Company company){
         return this.companyRepository.addCompany(company);
     }
+
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Company updateCompany(@PathVariable Integer id, @RequestBody Company company) {
+        company.setId(id);
+        return this.companyRepository.updateCompany(id, company);
+    }
 }

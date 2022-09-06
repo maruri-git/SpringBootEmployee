@@ -59,6 +59,19 @@ public class CompanyRepository {
         return company;
     }
 
+    public Company updateCompany(Integer id, Company company) {
+        Company ExistingCompany = findById(id);
+
+        if(company.getName() != null) {
+            ExistingCompany.setName(company.getName());
+        }
+        if(company.getEmployees() != null) {
+            ExistingCompany.setEmployees(company.getEmployees());
+        }
+
+        return ExistingCompany;
+    }
+
     private Company findById(Integer id) {
         return this.companies.stream()
                 .filter(company -> company.getId().equals(id))
