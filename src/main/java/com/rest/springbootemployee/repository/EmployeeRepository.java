@@ -39,8 +39,8 @@ public class EmployeeRepository {
 
 
     public Employee add(Employee employee) {
-        int employeeId = this.employeeSize+1;
-        employee.setId(employeeId);
+        int nextId = generateNextId();
+        employee.setId(nextId);
         this.employees.add(employee);
         return employee;
     }
@@ -61,5 +61,19 @@ public class EmployeeRepository {
     public void delete(Integer id) {
         Employee existingEmployee = findById(id);
         employees.remove(existingEmployee);
+    }
+
+    public List<Employee> findByPage(int page, int pageSize) {
+        return employees.stream()
+                .skip((page-1)*pageSize)
+                .limit(pageSize)
+                .collect(Collectors.toList());
+    }
+
+    private Integer generateNextId() {
+        return this.employees.stream()
+                .mapToInt(employee -> employee.getId())
+                .max()
+                .orElse(1) + 1;
     }
 }
