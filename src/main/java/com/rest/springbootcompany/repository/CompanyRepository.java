@@ -5,8 +5,8 @@ import com.rest.springbootcompany.model.Company;
 import com.rest.springbootemployee.model.Employee;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Repository
 public class CompanyRepository {
@@ -36,6 +36,12 @@ public class CompanyRepository {
 
     public Company findCompanyById(Integer id) {
         return findById(id);
+    }
+
+    public List<Employee> findEmployeesByCompanyId(Integer id) {
+        Company ExistingCompany = findById(id);
+
+        return ExistingCompany.getEmployees();
     }
 
     private Company findById(Integer id) {

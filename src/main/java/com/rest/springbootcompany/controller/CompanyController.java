@@ -2,6 +2,7 @@ package com.rest.springbootcompany.controller;
 
 import com.rest.springbootcompany.model.Company;
 import com.rest.springbootcompany.repository.CompanyRepository;
+import com.rest.springbootemployee.model.Employee;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,4 +26,10 @@ public class CompanyController {
     public Company getCompanyById(@PathVariable Integer id) {
         return this.companyRepository.findCompanyById(id);
     }
+
+    @GetMapping("{id}/employees")
+    public List<Employee> getEmployeesByCompanyId(@PathVariable Integer id) {
+        return this.companyRepository.findEmployeesByCompanyId(id);
+    }
+
 }
