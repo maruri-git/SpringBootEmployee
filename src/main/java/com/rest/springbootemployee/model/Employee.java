@@ -1,4 +1,4 @@
-package com.rest.springbootemployee;
+package com.rest.springbootemployee.model;
 
 public class Employee {
     private Integer id;

@@ -1,5 +1,7 @@
-package com.rest.springbootemployee;
+package com.rest.springbootemployee.repository;
 
+import com.rest.springbootemployee.exception.EmployeeNotFoundException;
+import com.rest.springbootemployee.model.Employee;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -18,5 +20,12 @@ public class EmployeeRepository {
 
     public List<Employee> findAll() {
         return this.employees;
+    }
+
+    public Employee findById(Integer id) {
+        return this.employees.stream()
+                .filter(employee -> employee.getId().equals(id))
+                .findFirst()
+                .orElseThrow(EmployeeNotFoundException::new);
     }
 }
