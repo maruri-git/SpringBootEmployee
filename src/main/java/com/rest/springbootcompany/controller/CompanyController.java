@@ -20,4 +20,9 @@ public class CompanyController {
     public List<Company> getAllCompany() {
         return this.companyRepository.findAll();
     }
+
+    @GetMapping({"/{id}"})
+    public Company getCompanyById(@PathVariable Integer id) {
+        return this.companyRepository.findCompanyById(id);
+    }
 }

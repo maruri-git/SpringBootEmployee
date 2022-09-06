@@ -34,22 +34,14 @@ public class CompanyRepository {
         return this.companies;
     }
 
-    public void delete(Integer id) {
-        Company existingEmployee = findById(id);
-        employees.remove(existingEmployee);
+    public Company findCompanyById(Integer id) {
+        return findById(id);
     }
 
-    public List<Company> findByPage(int page, int pageSize) {
-        return employees.stream()
-                .skip((page-1)*pageSize)
-                .limit(pageSize)
-                .collect(Collectors.toList());
-    }
-
-    private Integer generateNextId() {
-        return this.employees.stream()
-                .mapToInt(employee -> employee.getId())
-                .max()
-                .orElse(1) + 1;
+    private Company findById(Integer id) {
+        return this.companies.stream()
+                .filter(company -> company.getId().equals(id))
+                .findFirst()
+                .orElseThrow(CompanyNotFoundException::new);
     }
 }
