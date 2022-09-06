@@ -42,6 +42,7 @@ public class EmployeeController {
     public Employee updateEmployee(@PathVariable Integer id, @RequestBody Employee employee) {
         employee.setId(id);
         return this.employeeRepository.updateEmployee(employee);
+        // TODO: should not edit name, gender
     }
 
     @DeleteMapping(path = {"/{id}"})
