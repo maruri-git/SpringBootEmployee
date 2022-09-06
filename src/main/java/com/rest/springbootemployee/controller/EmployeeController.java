@@ -2,6 +2,7 @@ package com.rest.springbootemployee.controller;
 
 import com.rest.springbootemployee.repository.EmployeeRepository;
 import com.rest.springbootemployee.model.Employee;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,5 +27,13 @@ public class EmployeeController {
     }
 
     @GetMapping(params = {"gender"})
-    public List<Employee> findByGender(@RequestParam String gender) {return this.employeeRepository.findByGender(gender);}
+    public List<Employee> findByGender(@RequestParam String gender) {
+        return this.employeeRepository.findByGender(gender);
+    }
+
+    @PostMapping()
+    @ResponseStatus(HttpStatus.CREATED)
+    public Employee addEmployee(@RequestBody Employee employee) {
+        return this.employeeRepository.add(employee);
+    }
 }
