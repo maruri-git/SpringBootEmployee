@@ -40,6 +40,13 @@ public class EmployeeController {
     @PutMapping(path = {"/{id}"})
     @ResponseStatus(HttpStatus.CREATED)
     public Employee updateEmployee(@PathVariable Integer id, @RequestBody Employee employee) {
+        employee.setId(id);
         return this.employeeRepository.updateEmployee(employee);
+    }
+
+    @DeleteMapping(path = {"/{id}"})
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteEmployee(@PathVariable Integer id, @RequestBody Employee employee) {
+        this.employeeRepository.delete(id);
     }
 }

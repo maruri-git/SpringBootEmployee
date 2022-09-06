@@ -57,4 +57,9 @@ public class EmployeeRepository {
         updatedEmployee.setSalary(employee.getSalary());
         return updatedEmployee;
     }
+
+    public void delete(Integer id) {
+        Employee existingEmployee = findById(id);
+        employees.remove(existingEmployee);
+    }
 }
