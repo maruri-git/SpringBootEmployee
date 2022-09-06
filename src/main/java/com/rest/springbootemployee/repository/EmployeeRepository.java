@@ -44,4 +44,17 @@ public class EmployeeRepository {
         this.employees.add(employee);
         return employee;
     }
+
+    public Employee updateEmployee(Employee employee) {
+        Employee updatedEmployee = this.employees.stream()
+                .filter(employee1 -> employee1.getId().equals((employee.getId())))
+                .findFirst()
+                .orElseThrow(EmployeeNotFoundException::new);
+
+        updatedEmployee.setName(employee.getName());
+        updatedEmployee.setAge(employee.getAge());
+        updatedEmployee.setGender(employee.getGender());
+        updatedEmployee.setSalary(employee.getSalary());
+        return updatedEmployee;
+    }
 }

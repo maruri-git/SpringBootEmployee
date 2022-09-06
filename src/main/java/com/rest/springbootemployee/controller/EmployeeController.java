@@ -36,4 +36,10 @@ public class EmployeeController {
     public Employee addEmployee(@RequestBody Employee employee) {
         return this.employeeRepository.add(employee);
     }
+
+    @PutMapping(path = {"/{id}"})
+    @ResponseStatus(HttpStatus.CREATED)
+    public Employee updateEmployee(@PathVariable Integer id, @RequestBody Employee employee) {
+        return this.employeeRepository.updateEmployee(employee);
+    }
 }
