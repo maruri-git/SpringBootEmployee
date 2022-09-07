@@ -40,4 +40,8 @@ public class CompanyService {
     public void delete(Integer id) {
         this.companyRepository.delete(id);
     }
+
+    public void clear() {
+        this.companyRepository.clear();
+    }
 }
