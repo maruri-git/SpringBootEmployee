@@ -44,7 +44,7 @@ public class CompanyRepository {
         return ExistingCompany.getEmployees();
     }
 
-    public List<Company> findCompanyByPage(int page, int pageSize) {
+    public List<Company> findCompanyByPage(Integer page, Integer pageSize) {
         return companies.stream()
                 .skip((long) (page - 1) *pageSize)
                 .limit(pageSize)
