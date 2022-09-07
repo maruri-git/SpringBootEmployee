@@ -46,7 +46,7 @@ public class CompanyRepository {
 
     public List<Company> findCompanyByPage(int page, int pageSize) {
         return companies.stream()
-                .skip((page-1)*pageSize)
+                .skip((long) (page - 1) *pageSize)
                 .limit(pageSize)
                 .collect(Collectors.toList());
     }
