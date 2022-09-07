@@ -11,23 +11,11 @@ import java.util.stream.Collectors;
 @Repository
 public class CompanyRepository {
     private List<Company> companies;
+    private int id;
 
     public CompanyRepository() {
-        List<Employee> employeeList = EmployeeDataLoader();
-        List<Company> companyList = new ArrayList<>();
-        companyList.add(new Company(1, "spring", employeeList));
-        companyList.add(new Company(2, "fall", employeeList));
-        this.companies = companyList;
-    }
-
-    private List<Employee> EmployeeDataLoader() {
-        List<Employee> employees = new ArrayList<>();
-        employees.add((new Employee(1,"Mark", 23, "Male", 99999)));
-        employees.add(new Employee(2, "Luke", 23, "Male", 9999999));
-        employees.add(new Employee(3, "John", 24, "Male", 99999));
-        employees.add(new Employee(4, "Ruby", 24, "Female", 80000));
-        employees.add(new Employee(5, "Lily", 20, "Female", 900000));
-        return employees;
+        this.companies = new ArrayList<>();
+        this.id = 0;
     }
 
     public List<Company> findAll() {
@@ -84,10 +72,11 @@ public class CompanyRepository {
                 .orElseThrow(CompanyNotFoundException::new);
     }
 
-    private Integer generateNextId() {
-        return this.companies.stream()
-                .mapToInt(Company::getId)
-                .max()
-                .orElse(1) + 1;
+    private int generateNextId() {
+        return this.id += 1;
+    }
+
+    public void clear() {
+        this.companies.clear();
     }
 }
