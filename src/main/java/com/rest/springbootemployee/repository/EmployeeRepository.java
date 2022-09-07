@@ -44,15 +44,13 @@ public class EmployeeRepository {
     }
 
     public Employee updateEmployee(Employee employee) {
-        Employee updatedEmployee = this.employees.stream()
-                .filter(employee1 -> employee1.getId().equals((employee.getId())))
-                .findFirst()
-                .orElseThrow(EmployeeNotFoundException::new);
+        Employee updatedEmployee = findById(employee.getId());
 
         updatedEmployee.setName(employee.getName());
         updatedEmployee.setAge(employee.getAge());
         updatedEmployee.setGender(employee.getGender());
         updatedEmployee.setSalary(employee.getSalary());
+
         return updatedEmployee;
     }
 
@@ -63,7 +61,7 @@ public class EmployeeRepository {
 
     public List<Employee> findByPage(int page, int pageSize) {
         return employees.stream()
-                .skip((page-1)*pageSize)
+                .skip((long) (page - 1) *pageSize)
                 .limit(pageSize)
                 .collect(Collectors.toList());
     }
