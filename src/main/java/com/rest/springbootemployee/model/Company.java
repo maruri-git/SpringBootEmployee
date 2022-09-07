@@ -1,4 +1,4 @@
-package com.rest.springbootcompany.model;
+package com.rest.springbootemployee.model;
 
 import com.rest.springbootemployee.model.Employee;
 

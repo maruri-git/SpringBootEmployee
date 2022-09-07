@@ -1,7 +1,7 @@
-package com.rest.springbootcompany.repository;
+package com.rest.springbootemployee.repository;
 
-import com.rest.springbootcompany.exception.CompanyNotFoundException;
-import com.rest.springbootcompany.model.Company;
+import com.rest.springbootemployee.exception.CompanyNotFoundException;
+import com.rest.springbootemployee.model.Company;
 import com.rest.springbootemployee.model.Employee;
 import org.springframework.stereotype.Repository;
 

@@ -1,4 +1,4 @@
-package com.rest.springbootcompany.exception;
+package com.rest.springbootemployee.exception;
 
 public class CompanyNotFoundException extends RuntimeException{
     public CompanyNotFoundException() {
