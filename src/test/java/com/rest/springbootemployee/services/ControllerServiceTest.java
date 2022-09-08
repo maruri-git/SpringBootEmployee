@@ -47,4 +47,17 @@ public class ControllerServiceTest {
         verify(companyRepository).findAll();
         assertThat(companiesFromRepository, hasSize(2));
     }
+    @Test
+    void should_return_company_when_find_by_id_given_id() {
+        //given
+        Company company = new Company(1, "spring", employeeList);
+        when(companyRepository.findCompanyById(1)).thenReturn(company);
+        //when
+        Company companyFromRepository = companyService.findCompanyById(1);
+        //then
+        verify(companyRepository).findCompanyById(1);
+        assertThat(companyFromRepository.getId(), is(1));
+        assertThat(companyFromRepository.getName(), is("spring"));
+    }
+
 }
