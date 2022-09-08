@@ -1,6 +1,5 @@
 package com.rest.springbootemployee.services;
 
-
 import com.rest.springbootemployee.model.Employee;
 import com.rest.springbootemployee.repository.EmployeeRepository;
 import org.junit.jupiter.api.Test;
@@ -73,9 +72,9 @@ public class EmployeeServiceTest {
     @Test
     void should_return_two_employees_when_find_by_page_given_page_page_size() {
         //given
-        int page =  1;
+        int page = 1;
         int pageSize = 2;
-        Employee employee1 = new Employee(1,"Male1", 20, "Male", 2000);
+        Employee employee1 = new Employee(1, "Male1", 20, "Male", 2000);
         Employee employee2 = new Employee(2, "Female1", 22, "Female", 2000);
 
         List<Employee> employeeList = new ArrayList<>(Arrays.asList(employee1, employee2));
@@ -90,6 +89,7 @@ public class EmployeeServiceTest {
         assertThat(employeesFromRepository.get(0).getId(), is(employee1.getId()));
         assertThat(employeesFromRepository.get(1).getId(), is(employee2.getId()));
     }
+
     @Test
     void should_return_updated_employee_when_update_given_updated_employee_and_id() {
         //given
@@ -104,6 +104,7 @@ public class EmployeeServiceTest {
         assertThat(updatedEmployee.getAge(), is(21));
         assertThat(updatedEmployee.getSalary(), is(3000));
     }
+
     @Test
     void should_add_employee_when_add_given_new_employee() {
         //given
@@ -115,5 +116,15 @@ public class EmployeeServiceTest {
         verify(employeeRepository).add(employee);
         assertThat(newEmployee.getId(), is(1));
         assertThat(newEmployee, is(employee));
+    }
+
+    @Test
+    void should_delete_employee_when_delete_given_id() {
+        //given
+        doNothing().when(employeeRepository).delete(1);
+        //when
+        employeeService.delete(1);
+        //then
+        verify(employeeRepository).delete(1);
     }
 }
