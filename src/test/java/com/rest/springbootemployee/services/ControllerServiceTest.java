@@ -74,5 +74,16 @@ public class ControllerServiceTest {
         verify(companyRepository).findCompanyByPage(page,pageSize);
         assertThat(companiesFromRepository, hasSize(2));
     }
+    @Test
+    void should_return_added_company_when_add_given_new_company() {
+        //given
+        Company company = new Company(1, "spring", employeeList);
+        when(companyRepository.addCompany(company)).thenReturn(company);
+        //when
+        Company newCompany = companyService.addCompany(company);
+        //then
+        verify(companyRepository).addCompany(company);
+        assertThat(newCompany.getName(), is("spring"));
+    }
 
 }
