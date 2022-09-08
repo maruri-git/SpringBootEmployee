@@ -85,5 +85,17 @@ public class ControllerServiceTest {
         verify(companyRepository).addCompany(company);
         assertThat(newCompany.getName(), is("spring"));
     }
+    @Test
+    void should_return_updated_company_when_update_given_id_and_new_company_details() {
+        //given
+        Company company = new Company(1, "spring", employeeList);
 
+        when(companyRepository.updateCompany(1, company)).thenReturn(company);
+        //when
+        Company updatedCompany = companyService.updateCompany(1,company);
+        //then
+        verify(companyRepository).updateCompany(1,company);
+        assertThat(updatedCompany.getId(), is(1));
+        assertThat(updatedCompany.getName(), is("spring"));
+    }
 }
