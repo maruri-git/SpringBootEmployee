@@ -43,17 +43,6 @@ public class EmployeeRepository {
         return employee;
     }
 
-    public Employee updateEmployee(Employee employee) {
-        Employee updatedEmployee = findById(employee.getId());
-
-        updatedEmployee.setName(employee.getName());
-        updatedEmployee.setAge(employee.getAge());
-        updatedEmployee.setGender(employee.getGender());
-        updatedEmployee.setSalary(employee.getSalary());
-
-        return updatedEmployee;
-    }
-
     public void delete(Integer id) {
         Employee existingEmployee = findById(id);
         employees.remove(existingEmployee);

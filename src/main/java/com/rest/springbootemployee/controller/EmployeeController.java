@@ -36,7 +36,7 @@ public class EmployeeController {
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
     public Employee addEmployee(@RequestBody Employee employee) {
-        return this.employeeService.add(employee);
+        return this.employeeService.save(employee);
     }
 
     @PutMapping(path = {"/{id}"})
@@ -50,7 +50,7 @@ public class EmployeeController {
     @DeleteMapping(path = {"/{id}"})
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteEmployee(@PathVariable Integer id) {
-        this.employeeService.delete(id);
+        this.employeeService.deleteById(id);
     }
 
     @GetMapping(params = {"page", "pageSize"})

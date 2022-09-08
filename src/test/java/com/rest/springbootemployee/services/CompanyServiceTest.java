@@ -19,7 +19,7 @@ import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.*;
  
 @ExtendWith(SpringExtension.class)
-public class ControllerServiceTest {
+public class CompanyServiceTest {
 
     @InjectMocks
     private CompanyService companyService;
