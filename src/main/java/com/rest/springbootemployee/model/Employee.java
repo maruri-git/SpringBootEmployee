@@ -13,6 +13,7 @@ public class Employee {
     private Integer salary;
 
     @ManyToOne
+    @JoinColumn(name = "company_id", nullable = true)
     private Company company;
 
     public Employee() {
@@ -24,6 +25,15 @@ public class Employee {
         this.age = age;
         this.gender = gender;
         this.salary = salary;
+    }
+
+    public Employee(Integer id, String name, Integer age, String gender, Integer salary, Company company) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
+        this.salary = salary;
+        this.company = company;
     }
 
     public Integer getId() {
@@ -64,6 +74,14 @@ public class Employee {
 
     public void setSalary(int salary) {
         this.salary = salary;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
     }
 
     @Override

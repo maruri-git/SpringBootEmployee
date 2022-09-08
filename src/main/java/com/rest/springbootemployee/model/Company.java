@@ -9,16 +9,27 @@ public class Company {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
-    @OneToMany(mappedBy = "company")
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
     private List<Employee> employees;
 
     public Company() {
+    }
+
+    public Company(Integer id) {
+        this.id = id;
+    }
+
+    public Company(Integer id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
     public Company(Integer id, String name, List<Employee> employees) {
         this.id = id;
         this.name = name;
         this.employees = employees;
+
+        this.employees.forEach(employee -> employee.setCompany(this));
     }
 
     public Integer getId() {
@@ -50,7 +61,6 @@ public class Company {
         return "Company{" +
                 "id=" + id +
                 ", companyName='" + name + '\'' +
-                ", employees=" + employees +
                 '}';
     }
 }

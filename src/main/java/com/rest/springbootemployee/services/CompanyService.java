@@ -47,10 +47,10 @@ public class CompanyService {
             existingCompany.setName(updatedCompany.getName());
         }
         if (updatedCompany.getEmployees() != null) {
-            updatedCompany.setEmployees(updatedCompany.getEmployees());
+            existingCompany.setEmployees(updatedCompany.getEmployees());
         }
 
-        return this.jpaCompanyRepository.save(updatedCompany);
+        return this.jpaCompanyRepository.save(existingCompany);
     }
 
     public void delete(Integer id) {
