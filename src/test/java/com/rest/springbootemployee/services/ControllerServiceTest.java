@@ -59,5 +59,20 @@ public class ControllerServiceTest {
         assertThat(companyFromRepository.getId(), is(1));
         assertThat(companyFromRepository.getName(), is("spring"));
     }
+    @Test
+    void should_return_two_companies_when_find_by_page_given_page_page_size() {
+        //given
+        final int page = 1;
+        final int pageSize = 2;
+        Company company1 = new Company(1, "spring", employeeList);
+        Company company2 = new Company(2, "summer", employeeList);
+        List<Company> companies = new ArrayList<>(Arrays.asList(company1,company2));
+        when(companyRepository.findCompanyByPage(page,pageSize)).thenReturn(companies);
+        //when
+        List<Company> companiesFromRepository = companyService.findCompanyByPage(page,pageSize);
+        //then
+        verify(companyRepository).findCompanyByPage(page,pageSize);
+        assertThat(companiesFromRepository, hasSize(2));
+    }
 
 }
