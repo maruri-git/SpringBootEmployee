@@ -1,9 +1,6 @@
 package com.rest.springbootemployee.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Employee {
@@ -14,6 +11,12 @@ public class Employee {
     private Integer age;
     private String gender;
     private Integer salary;
+
+    @ManyToOne
+    private Company company;
+
+    public Employee() {
+    }
 
     public Employee(Integer id, String name, Integer age, String gender, Integer salary) {
         this.id = id;

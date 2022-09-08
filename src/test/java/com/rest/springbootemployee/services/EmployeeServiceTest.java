@@ -1,7 +1,6 @@
 package com.rest.springbootemployee.services;
 
 import com.rest.springbootemployee.model.Employee;
-import com.rest.springbootemployee.repository.EmployeeRepository;
 import com.rest.springbootemployee.repository.JpaEmployeeRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,25 +13,25 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
-import static org.mockito.BDDMockito.*;
 
 @ExtendWith(SpringExtension.class)
 public class EmployeeServiceTest {
     @InjectMocks
     EmployeeService employeeService;
     @Mock
-    EmployeeRepository employeeRepository;
-    @Mock
     JpaEmployeeRepository jpaEmployeeRepository;
 
     @BeforeEach
     void cleanRepository() {
-        employeeRepository.clear();
         jpaEmployeeRepository.deleteAll();
     }
 
@@ -109,7 +108,7 @@ public class EmployeeServiceTest {
         Employee employee = new Employee(1, "Ruby", 20, "Female", 3000);
 
         Employee editedEmployee = new Employee(1, "Ruby", 21, "Female", 3001);
-        
+
         given(jpaEmployeeRepository.findById(1)).willReturn(Optional.of(editedEmployee));
         //when
         Employee updatedEmployee = employeeService.updateEmployee(editedEmployee);

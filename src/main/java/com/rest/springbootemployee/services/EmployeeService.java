@@ -2,12 +2,9 @@ package com.rest.springbootemployee.services;
 
 import com.rest.springbootemployee.exception.EmployeeNotFoundException;
 import com.rest.springbootemployee.model.Employee;
-import com.rest.springbootemployee.repository.EmployeeRepository;
 import com.rest.springbootemployee.repository.JpaEmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,17 +12,15 @@ import java.util.List;
 @Service
 public class EmployeeService {
     @Autowired
-    private EmployeeRepository employeeRepository;
 
     private JpaEmployeeRepository jpaEmployeeRepository;
 
-    public EmployeeService (JpaEmployeeRepository jpaEmployeeRepository, EmployeeRepository employeeRepository) {
+    public EmployeeService(JpaEmployeeRepository jpaEmployeeRepository) {
         this.jpaEmployeeRepository = jpaEmployeeRepository;
-        this.employeeRepository = employeeRepository;
     }
 
     public void clear() {
-        this.employeeRepository.clear();
+        this.jpaEmployeeRepository.deleteAll();
     }
 
     public Employee save(Employee employee) {
@@ -48,10 +43,10 @@ public class EmployeeService {
         Employee existingEmployee = jpaEmployeeRepository
                 .findById(employee.getId()).orElseThrow(EmployeeNotFoundException::new);
 
-        if(employee.getAge() != null) {
+        if (employee.getAge() != null) {
             existingEmployee.setAge(employee.getAge());
         }
-        if(employee.getSalary() != null){
+        if (employee.getSalary() != null) {
             existingEmployee.setSalary(employee.getSalary());
         }
         jpaEmployeeRepository.save(existingEmployee);
