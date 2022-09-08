@@ -98,4 +98,13 @@ public class ControllerServiceTest {
         assertThat(updatedCompany.getId(), is(1));
         assertThat(updatedCompany.getName(), is("spring"));
     }
+    @Test
+    void should_delete_company_when_delete_given_id() {
+        //given
+        doNothing().when(companyRepository).delete(1);
+        //when
+        companyService.delete(1);
+        //then
+        verify(companyRepository).delete(1);
+    }
 }
