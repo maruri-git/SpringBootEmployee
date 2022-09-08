@@ -14,9 +14,10 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.*;
-
+ 
 @ExtendWith(SpringExtension.class)
 public class ControllerServiceTest {
 
@@ -47,6 +48,7 @@ public class ControllerServiceTest {
         verify(companyRepository).findAll();
         assertThat(companiesFromRepository, hasSize(2));
     }
+
     @Test
     void should_return_company_when_find_by_id_given_id() {
         //given
@@ -59,6 +61,7 @@ public class ControllerServiceTest {
         assertThat(companyFromRepository.getId(), is(1));
         assertThat(companyFromRepository.getName(), is("spring"));
     }
+
     @Test
     void should_return_two_companies_when_find_by_page_given_page_page_size() {
         //given
@@ -66,14 +69,15 @@ public class ControllerServiceTest {
         final int pageSize = 2;
         Company company1 = new Company(1, "spring", employeeList);
         Company company2 = new Company(2, "summer", employeeList);
-        List<Company> companies = new ArrayList<>(Arrays.asList(company1,company2));
-        when(companyRepository.findCompanyByPage(page,pageSize)).thenReturn(companies);
+        List<Company> companies = new ArrayList<>(Arrays.asList(company1, company2));
+        when(companyRepository.findCompanyByPage(page, pageSize)).thenReturn(companies);
         //when
-        List<Company> companiesFromRepository = companyService.findCompanyByPage(page,pageSize);
+        List<Company> companiesFromRepository = companyService.findCompanyByPage(page, pageSize);
         //then
-        verify(companyRepository).findCompanyByPage(page,pageSize);
+        verify(companyRepository).findCompanyByPage(page, pageSize);
         assertThat(companiesFromRepository, hasSize(2));
     }
+
     @Test
     void should_return_added_company_when_add_given_new_company() {
         //given
@@ -85,6 +89,7 @@ public class ControllerServiceTest {
         verify(companyRepository).addCompany(company);
         assertThat(newCompany.getName(), is("spring"));
     }
+
     @Test
     void should_return_updated_company_when_update_given_id_and_new_company_details() {
         //given
@@ -92,12 +97,13 @@ public class ControllerServiceTest {
 
         when(companyRepository.updateCompany(1, company)).thenReturn(company);
         //when
-        Company updatedCompany = companyService.updateCompany(1,company);
+        Company updatedCompany = companyService.updateCompany(1, company);
         //then
-        verify(companyRepository).updateCompany(1,company);
+        verify(companyRepository).updateCompany(1, company);
         assertThat(updatedCompany.getId(), is(1));
         assertThat(updatedCompany.getName(), is("spring"));
     }
+
     @Test
     void should_delete_company_when_delete_given_id() {
         //given
