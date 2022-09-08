@@ -96,12 +96,24 @@ public class EmployeeServiceTest {
         Employee employee = new Employee(1, "Ruby", 20, "Female", 3000);
         Employee editedEmployee = new Employee(1, "Ruby", 21, "Female", 3000);
 
-        when(employeeRepository.updateEmployee(employee)).thenReturn(editedEmployee);
+        when(employeeRepository.updateEmployee(employee)).thenReturn(employee);
         //when
         Employee updatedEmployee = employeeService.updateEmployee(editedEmployee);
         //then
         verify(employeeRepository).updateEmployee(employee);
         assertThat(updatedEmployee.getAge(), is(21));
         assertThat(updatedEmployee.getSalary(), is(3000));
+    }
+    @Test
+    void should_add_employee_when_add_given_new_employee() {
+        //given
+        Employee employee = new Employee(1, "TestMale", 20, "Male", 2000);
+        when(employeeRepository.add(employee)).thenReturn(employee);
+        //when
+        Employee newEmployee = employeeService.add(employee);
+        //then
+        verify(employeeRepository).add(employee);
+        assertThat(newEmployee.getId(), is(1));
+        assertThat(newEmployee, is(employee));
     }
 }
