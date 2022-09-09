@@ -28,8 +28,6 @@ public class Company {
         this.id = id;
         this.name = name;
         this.employees = employees;
-
-        this.employees.forEach(employee -> employee.setCompany(this));
     }
 
     public Integer getId() {

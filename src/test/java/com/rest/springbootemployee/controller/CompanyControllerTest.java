@@ -33,7 +33,7 @@ public class CompanyControllerTest {
     @Autowired
     private EmployeeService employeeService;
 
-    private final Employee testEmployee = new Employee(1, "Mark", 23, "Male", 99999, new Company(1));
+    private final Employee testEmployee = new Employee(1, "Mark", 23, "Male", 99999);
     private final List<Employee> employeeList = Arrays.asList(testEmployee);
 
     @BeforeEach
