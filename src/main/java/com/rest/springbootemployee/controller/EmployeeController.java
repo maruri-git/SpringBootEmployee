@@ -1,5 +1,8 @@
 package com.rest.springbootemployee.controller;
 
+import com.rest.springbootemployee.controller.dto.EmployeeRequest;
+import com.rest.springbootemployee.controller.dto.EmployeeResponse;
+import com.rest.springbootemployee.controller.mapper.EmployeeMapper;
 import com.rest.springbootemployee.model.Employee;
 import com.rest.springbootemployee.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +14,13 @@ import java.util.List;
 @RestController
 @RequestMapping(path = "/employees")
 public class EmployeeController {
-    @Autowired
     private final EmployeeService employeeService;
 
-    public EmployeeController(EmployeeService employeeService) {
+    private final EmployeeMapper employeeMapper;
+
+    public EmployeeController(EmployeeService employeeService, EmployeeMapper employeeMapper) {
         this.employeeService = employeeService;
+        this.employeeMapper = employeeMapper;
     }
 
     @GetMapping
@@ -24,8 +29,9 @@ public class EmployeeController {
     }
 
     @GetMapping(path = {"/{id}"})
-    public Employee findById(@PathVariable Integer id) {
-        return this.employeeService.findById(id);
+    public EmployeeResponse findById(@PathVariable Integer id) {
+        Employee employee = employeeService.findById(id);
+        return this.employeeMapper.toResponse(employee);
     }
 
     @GetMapping(params = {"gender"})
@@ -35,7 +41,8 @@ public class EmployeeController {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public Employee addEmployee(@RequestBody Employee employee) {
+    public Employee addEmployee(@RequestBody EmployeeRequest employeeRequest) {
+        Employee employee = employeeMapper.toEntity(employeeRequest);
         return this.employeeService.save(employee);
     }
 
@@ -44,7 +51,6 @@ public class EmployeeController {
     public Employee updateEmployee(@PathVariable Integer id, @RequestBody Employee employee) {
         employee.setId(id);
         return this.employeeService.updateEmployee(employee);
-        // TODO: should not edit name, gender
     }
 
     @DeleteMapping(path = {"/{id}"})

@@ -29,7 +29,7 @@ public class CompanyService {
 
     public List<Employee> findEmployeesByCompanyId(Integer id) {
         Company company = findCompanyById(id);
-        return this.jpaEmployeeRepository.findByCompany(company); // Method queries
+        return this.jpaEmployeeRepository.findByCompany(company);
     }
 
     public List<Company> findCompanyByPage(Integer page, Integer pageSize) {

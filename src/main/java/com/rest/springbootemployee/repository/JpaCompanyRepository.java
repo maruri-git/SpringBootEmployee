@@ -11,7 +11,4 @@ import java.util.List;
 @Repository
 public interface JpaCompanyRepository extends JpaRepository<Company, Integer> {
 
-//    @Query(value = "SELECT c.employees FROM Company c WHERE cCompanyId=:companyId", nativeQuery = true)
-//    public List<Employee> findEmployeesByCompanyId(Integer companyId);
-
 }

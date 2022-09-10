@@ -32,7 +32,7 @@ public class EmployeeService {
     }
 
     public Employee findById(Integer id) {
-        return this.jpaEmployeeRepository.findById(id).get();
+        return this.jpaEmployeeRepository.findById(id).orElseThrow(EmployeeNotFoundException::new);
     }
 
     public List<Employee> findByGender(String gender) {
@@ -40,8 +40,7 @@ public class EmployeeService {
     }
 
     public Employee updateEmployee(Employee employee) {
-        Employee existingEmployee = jpaEmployeeRepository
-                .findById(employee.getId()).orElseThrow(EmployeeNotFoundException::new);
+        Employee existingEmployee = findById(employee.getId());
 
         if (employee.getAge() != null) {
             existingEmployee.setAge(employee.getAge());
